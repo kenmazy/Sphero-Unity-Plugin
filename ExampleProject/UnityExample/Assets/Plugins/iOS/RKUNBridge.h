@@ -16,6 +16,8 @@ extern "C" {
         float x;
         float y;
         float z;
+        float xPos;
+		float yPos;
     } RKUNData;
 }
 
