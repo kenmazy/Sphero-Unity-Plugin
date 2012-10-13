@@ -15,6 +15,9 @@ public class RKUNBridge {
         public float x;
         public float y;
         public float z;
+		
+		public float xPos;
+		public float yPos;
     }
 	
 #if UNITY_ANDROID
@@ -73,6 +76,12 @@ public class RKUNBridge {
 #endif
 	public static extern void _disableDataStreaming();
 	
+#if UNITY_ANDROID
+	[DllImport ("RKUNBridge")]
+#else
+	[DllImport ("__Internal")]
+#endif
+	public static extern void _RKUNLocationCalibration();
 	
 #if UNITY_ANDROID
 	[DllImport ("RKUNBridge")]
