@@ -150,7 +150,7 @@ extern "C" {
     }
     void _RKUNLocationCalibration()
     {
-        [RKConfigureLocatorCommand sendCommandForFlag:0x00 newX:0 newY:0 newYaw:0];
+        [RKConfigureLocatorCommand sendCommandForFlag:RKConfigureLocatorRotateWithCalibrateFlagOff newX:0 newY:0 newYaw:0];
     }
     
 	
