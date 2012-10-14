@@ -387,3 +387,5 @@
 /Plugin/Universal Plugin Files/.DS_Store
 /Plugin/iOS Files/.DS_Store
 /ExampleProject/UnityExample/xcodeproj/
+/ExampleProject/UnityExample/Library/
+/ExampleProject/UnityExample/Temp/

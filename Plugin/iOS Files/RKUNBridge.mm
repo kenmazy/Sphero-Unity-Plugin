@@ -66,7 +66,7 @@ void UnityPause(bool pause);
     [RKStabilizationCommand sendCommandWithState:RKStabilizationStateOff];
     [RKBackLEDOutputCommand sendCommandWithBrightness:1.0];
     [RKRGBLEDOutputCommand sendCommandWithRed:1.0 green:1.0 blue:1.0];
-    [RKSetDataStreamingCommand sendCommandWithSampleRateDivisor:20 packetFrames:1 sensorMask:RKDataStreamingMaskAccelerometerXFiltered | RKDataStreamingMaskAccelerometerYFiltered | RKDataStreamingMaskAccelerometerZFiltered | RKDataStreamingMaskIMUPitchAngleFiltered | RKDataStreamingMaskIMURollAngleFiltered | RKDataStreamingMaskIMUYawAngleFiltered  packetCount:0];
+    [RKSetDataStreamingCommand sendCommandWithSampleRateDivisor:20 packetFrames:1 sensorMask:RKDataStreamingMaskAccelerometerXFiltered | RKDataStreamingMaskAccelerometerYFiltered | RKDataStreamingMaskAccelerometerZFiltered | RKDataStreamingMaskIMUPitchAngleFiltered | RKDataStreamingMaskIMURollAngleFiltered | RKDataStreamingMaskIMUYawAngleFiltered | RKDataStreamingMaskLocatorX |RKDataStreamingMaskLocatorY  packetCount:0];
     
     dataStreamingOn = YES;
     
@@ -101,6 +101,9 @@ void UnityPause(bool pause);
         sensorData.yaw = [[[sensors_data.dataFrames objectAtIndex:0] attitudeData] yaw];
         sensorData.pitch = [[[sensors_data.dataFrames objectAtIndex:0] attitudeData] pitch];
         sensorData.roll = [[[sensors_data.dataFrames objectAtIndex:0] attitudeData] roll];
+        
+        sensorData.xPos = [[[sensors_data.dataFrames objectAtIndex:0] locatorData] position].x; 
+        sensorData.yPos = [[[sensors_data.dataFrames objectAtIndex:0] locatorData] position].y; 
         
         self.lastData = sensorData;
         
@@ -144,6 +147,10 @@ extern "C" {
     
     void _RKUNBackLED(float intensity) {
         [RKBackLEDOutputCommand sendCommandWithBrightness:intensity];
+    }
+    void _RKUNLocationCalibration()
+    {
+        [RKConfigureLocatorCommand sendCommandForFlag:0x00 newX:0 newY:0 newYaw:0];
     }
     
 	
