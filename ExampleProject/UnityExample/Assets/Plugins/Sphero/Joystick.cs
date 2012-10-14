@@ -195,7 +195,6 @@ public class Joystick : MonoBehaviour {
 			velocity = velocityScale;
 		}
 		Vector3 movement=new Vector3(inputVector.x, 0, inputVector.y).normalized;
-		ship.transform.Translate(movement*velocity);
 	#if !UNITY_EDITOR
 		if(velocity > 0.0f) {
 			RKUNBridge._RKUNRoll((int)degrees, velocity);
@@ -206,6 +205,7 @@ public class Joystick : MonoBehaviour {
 			RKUNBridge._RKUNRoll((int)lastHeading, 0.0f);
 		}
 	#endif
+		ship.transform.Translate(movement*velocity);
 		
 	}
 	
