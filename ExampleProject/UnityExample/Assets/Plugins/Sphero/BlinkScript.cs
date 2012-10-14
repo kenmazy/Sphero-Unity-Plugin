@@ -7,11 +7,14 @@ public class BlinkScript : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+#if !UNITY_EDITOR
 		RKUNBridge._RKUNSetupRobotConnection();
+#endif
 	}
 	
 	// Update is called once per frame
 	void Update () {
+#if !UNITY_EDITOR
 		//Make Sphero change color every 30 frames
 		if(counter == 0) {
 			RKUNBridge._RKUNRGB(1.0f, 0.0f, 0.0f);	
@@ -22,5 +25,6 @@ public class BlinkScript : MonoBehaviour {
 		}
 		counter++;
 		if(counter==90) counter = 0;
+#endif
 	}
 }
