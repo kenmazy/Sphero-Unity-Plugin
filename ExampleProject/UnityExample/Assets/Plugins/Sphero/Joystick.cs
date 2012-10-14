@@ -13,6 +13,8 @@ public class Joystick : MonoBehaviour {
 	public Vector2 deadZone = Vector2.zero;
 	public bool normalize = false;
 	public Vector2 position;
+	
+	public GameObject ship;
 
 	private int lastFingerId = -1;								// Finger last used for this joystick
 	private Vector2 fingerDownPos;
@@ -188,11 +190,13 @@ public class Joystick : MonoBehaviour {
 			degrees -= 360.0f;
 		}
 		
-	#if !UNITY_EDITOR
 		velocity = velocity * velocityScale;
 		if(velocity > velocityScale) {
 			velocity = velocityScale;
 		}
+		Vector3 movement=new Vector3(inputVector.x, 0, inputVector.y).normalized;
+		ship.transform.Translate(movement*velocity);
+	#if !UNITY_EDITOR
 		if(velocity > 0.0f) {
 			RKUNBridge._RKUNRoll((int)degrees, velocity);
 			stopped = false;
